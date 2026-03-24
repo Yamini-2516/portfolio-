@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Cart | Nexus{% endblock %}
+
+{% block content %}
+<div class="animate-up">
+    <h1 style="margin-bottom: 2rem;">Shopping Cart</h1>
+
+    {% if cart_items %}
+    <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+        <!-- Cart Items -->
+        <div style="flex: 2; min-width: 300px;">
+            {% for item in cart_items %}
+            <div class="glass" style="display: flex; align-items: center; padding: 1rem; margin-bottom: 1rem; gap: 1rem;">
+                <div style="width: 80px; height: 80px; border-radius: 8px; background-image: url('{{ item.product.image_url }}'); background-size: cover; background-position: center;"></div>
+                <div style="flex: 1;">
+                    <h3 style="margin-bottom: 0.2rem;"><a href="{{ url_for('main.product_detail', id=item.product.id) }}" style="color: white; text-decoration: none;">{{ item.product.name }}</a></h3>
+                    <p style="color: var(--accent); font-weight: bold;">₹{{ "{:,.2f}".format(item.product.price) }}</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <span style="color: var(--text-secondary);">Qty: {{ item.quantity }}</span>
+                    <form action="{{ url_for('main.remove_from_cart', item_id=item.id) }}" method="POST">
+                        <button type="submit" class="btn btn-danger" style="padding: 0.5rem 1rem;"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Order Summary -->
+        <div class="glass" style="flex: 1; min-width: 300px; padding: 2rem; align-self: start;">
+            <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">Order Summary</h3>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--text-secondary);">
+                <span>Subtotal</span>
+                <span>₹{{ "{:,.2f}".format(total) }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--text-secondary);">
+                <span>Shipping</span>
+                <span>Free</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 2rem; font-size: 1.5rem; font-weight: bold; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                <span>Total</span>
+                <span style="color: var(--accent);">₹{{ "{:,.2f}".format(total) }}</span>
+            </div>
+            
+            <form action="{{ url_for('main.checkout') }}" method="POST">
+                <button type="submit" class="btn btn-primary btn-block" style="font-size: 1.2rem; padding: 1rem;"><i class="fa-solid fa-lock"></i> Secure Checkout</button>
+            </form>
+            <p style="text-align: center; font-size: 0.8rem; color: var(--text-secondary); margin-top: 1rem;"><i class="fa-solid fa-shield-halved"></i> 256-bit encrypted transaction</p>
+        </div>
+    </div>
+    {% else %}
+    <div class="glass" style="padding: 4rem 2rem; text-align: center;">
+        <i class="fa-solid fa-cart-shopping" style="font-size: 4rem; color: var(--text-secondary); margin-bottom: 1rem; opacity: 0.5;"></i>
+        <h2>Your cart is empty</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Looks like you haven't made your choice yet.</p>
+        <a href="{{ url_for('main.shop') }}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Nexus | Next-Gen E-Commerce{% endblock %}
+
+{% block content %}
+<section class="hero-section" style="min-height: 80vh; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+    <div class="hero-content animate-up" style="flex: 1; min-width: 300px; padding-right: 2rem;">
+        <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem;">
+            Experience the <span style="color: var(--accent); white-space: nowrap;">Future</span> of Shopping
+        </h1>
+        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
+            Interactive 3D product previews. Seamless checkout. Welcome to the Nexus iteration zero.
+        </p>
+        <div style="display: flex; gap: 1rem;">
+            <a href="{{ url_for('main.shop') }}" class="btn btn-primary">Shop Now</a>
+            <a href="{{ url_for('main.about') }}" class="btn btn-outline">Learn More</a>
+        </div>
+    </div>
+    <div class="hero-3d glass animate-up" style="flex: 1; min-width: 300px; height: 500px; padding: 1rem;">
+        <!-- Featured Model -->
+        <div class="canvas-container" data-model-url="vr" data-image-url="/static/images/vr_goggles.png" data-interactive="true">
+            <div class="model-placeholder" style="background-image: url('https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=500&q=80')"></div>
+        </div>
+    </div>
+</section>
+
+<section class="featured-section" style="margin-top: 5rem;">
+    <h2 class="animate-up" style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Featured Technologies</h2>
+    
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card glass">
+            <a href="{{ url_for('main.product_detail', id=product.id) }}" style="text-decoration: none; color: inherit;">
+                <div class="product-card-3d-wrapper canvas-container" data-model-url="{{ product.model_url }}" data-image-url="{{ product.image_url }}" data-interactive="false">
+                    <div class="model-placeholder" style="background-image: url('{{ product.image_url }}')"></div>
+                </div>
+                <div class="product-info">
+                    <h3>{{ product.name }}</h3>
+                    <div class="flex-between">
+                        <span class="product-price">₹{{ "{:,.2f}".format(product.price) }}</span>
+                        <form action="{{ url_for('main.add_to_cart', product_id=product.id) }}" method="POST" style="display:inline;" onclick="event.stopPropagation()">
+                            <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem;"><i class="fa-solid fa-cart-plus"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

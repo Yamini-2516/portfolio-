@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} | Nexus{% endblock %}
+
+{% block content %}
+<div class="product-detail-layout" style="display: flex; flex-wrap: wrap; gap: 4rem; margin-top: 2rem;">
+    <!-- 3D Viewer Side -->
+    <div class="product-viewer glass animate-up" style="flex: 1; min-width: 300px; height: 600px; padding: 1rem;">
+        <div class="canvas-container" data-model-url="{{ product.model_url }}" data-image-url="{{ product.image_url }}" data-interactive="true" style="width: 100%; height: 100%;">
+            <div class="model-placeholder" style="background-image: url('{{ product.image_url }}')"></div>
+        </div>
+        <p style="text-align: center; color: var(--text-secondary); font-size: 0.8rem; margin-top: 1rem;"><i class="fa-solid fa-hand-pointer"></i> Drag to rotate, scroll to zoom.</p>
+    </div>
+
+    <!-- Info Side -->
+    <div class="product-info-detail animate-up" style="flex: 1; min-width: 300px;">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem; color: var(--text-primary);">{{ product.name }}</h1>
+        <div class="product-price" style="font-size: 2rem; color: var(--accent); margin-bottom: 2rem; font-weight: 800;">
+            ₹{{ "{:,.2f}".format(product.price) }}
+        </div>
+        
+        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+            {{ product.description }}
+        </p>
+
+        <div style="margin-bottom: 2rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+            <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-box-open" style="color: var(--accent);"></i> In Stock: {{ product.stock }} units</p>
+            <p><i class="fa-solid fa-truck" style="color: var(--accent);"></i> Free next-day shipping.</p>
+        </div>
+
+        <form action="{{ url_for('main.add_to_cart', product_id=product.id) }}" method="POST" style="display: flex; gap: 1rem; margin-bottom: 3rem;">
+            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control" style="width: 80px; font-size: 1.2rem; text-align: center;">
+            <button type="submit" class="btn btn-primary btn-block" style="flex: 1; font-size: 1.2rem;"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+        </form>
+
+        <!-- Reviews Section -->
+        <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1rem;">Reviews</h3>
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('main.add_review', product_id=product.id) }}" method="POST" class="form-group glass" style="padding: 1rem; margin-bottom: 2rem;">
+                <label class="form-label">Leave a review</label>
+                <div style="display:flex; gap: 0.5rem; margin-bottom: 1rem;">
+                    Rating: <input type="number" name="rating" min="1" max="5" value="5" class="form-control" style="width: 80px; display:inline-block; padding: 0.2rem;"> / 5
+                </div>
+                <textarea name="comment" rows="3" class="form-control" placeholder="Write your review here..."></textarea>
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit Review</button>
+            </form>
+        {% else %}
+            <p style="color: var(--text-secondary);"><a href="{{ url_for('main.login') }}" style="color: var(--accent);">Login</a> to write a review.</p>
+        {% endif %}
+
+        <div class="reviews-list" style="margin-top: 2rem;">
+            {% for review in reviews %}
+                <div class="review-item" style="padding: 1rem; margin-bottom: 1rem; border-left: 2px solid var(--accent); background: rgba(255,255,255,0.02);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <strong>{{ review.user.name }}</strong>
+                        <span style="color: #fbbf24;"><i class="fa-solid fa-star"></i> {{ review.rating }}/5</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">{{ review.comment }}</p>
+                    <small style="color: var(--text-secondary); opacity: 0.5;">{{ review.date_posted.strftime('%Y-%m-%d') }}</small>
+                </div>
+            {% else %}
+                <p style="color: var(--text-secondary);">No reviews yet. Be the first!</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

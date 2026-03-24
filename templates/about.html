@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}About | Nexus{% endblock %}
+
+{% block content %}
+<div class="animate-up" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+    <h1 style="text-align: center; margin-bottom: 1rem; font-size: 3rem;">About <span style="color: var(--accent);">Nexus</span></h1>
+    <p style="text-align: center; color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 3rem;">Redefining the digital shopping experience.</p>
+    
+    <div class="glass" style="padding: 3rem; margin-bottom: 2rem;">
+        <h2 style="margin-bottom: 1rem;"><i class="fa-solid fa-vr-cardboard" style="color: var(--accent);"></i> The Vision</h2>
+        <p style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+            Nexus was founded on a simple principle: online shopping shouldn't be flat. By leveraging cutting-edge WebGL technology and Three.js, we bring products to life directly in your browser. No plugins, no downloads, just seamless 3D interactive experiences.
+        </p>
+        <p style="line-height: 1.8; color: var(--text-secondary);">
+            Our goal is to merge the tactile feel of physical retail with the convenience of e-commerce. Spin, zoom, and inspect our next-generation gadgets before you make a decision.
+        </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 4rem;">
+        <div class="glass" style="padding: 2rem; text-align: center;">
+            <i class="fa-solid fa-cube" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+            <h3>3D Previews</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Interact with products in a fully 3D space.</p>
+        </div>
+        <div class="glass" style="padding: 2rem; text-align: center;">
+            <i class="fa-solid fa-bolt" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+            <h3>Lightning Fast</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Optimized models and blazing fast load times.</p>
+        </div>
+        <div class="glass" style="padding: 2rem; text-align: center;">
+            <i class="fa-solid fa-shield-cat" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+            <h3>Secure</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">End-to-end encryption for all your data.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

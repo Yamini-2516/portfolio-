@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Yamini Parmar | B.Tech IT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #2563eb;
+            --text: #334155;
+            --light-bg: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--text);
+            background: #e2e8f0;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .resume-page {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-name {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .resume-sub {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 0.25rem 0 0.75rem;
+        }
+
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .contact-bar span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border);
+            margin: 1.5rem 0;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.25rem;
+        }
+
+        p, ul {
+            font-size: 0.95rem;
+        }
+
+        ul {
+            list-style: disc;
+            padding-left: 1.25rem;
+        }
+
+        li {
+            margin-bottom: 0.35rem;
+        }
+
+        .entry {
+            margin-bottom: 1rem;
+        }
+
+        .entry-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-weight: 600;
+        }
+
+        .entry-title {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .entry-date {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .entry-sub {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .action-bar {
+            max-width: 850px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--accent);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+            }
+            .action-bar {
+                display: none;
+            }
+            .resume-page {
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="action-bar">
+        <a href="/" class="btn" style="background: #475569;"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+        <button onclick="window.print()" class="btn"><i class="fa-solid fa-print"></i> Print / Save as PDF</button>
+    </div>
+
+    <div class="resume-page">
+        <div class="resume-header">
+            <h1 class="resume-name">YAMINI PARMAR</h1>
+            <div class="resume-sub">B.Tech IT Student</div>
+            <div class="contact-bar">
+                <span><i class="fa-solid fa-phone"></i> +91 8128385822</span>
+                <span><i class="fa-solid fa-envelope"></i> yaminiparmar2516@gmail.com</span>
+                <span><i class="fa-brands fa-github"></i> Yamini-2516</span>
+                <span><i class="fa-solid fa-location-dot"></i> Gujarat, India</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <section class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p>
+                Highly motivated and detail-oriented B.Tech Information Technology student at <strong>Parul University, Vadodara</strong>, seeking an opportunity to apply strong problem-solving skills in a software development environment. Proficient in Python, Java, and web technologies with a strong interest in practical applications.
+            </p>
+        </section>
+
+        <hr>
+
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="entry">
+                <div class="entry-head">
+                    <span class="entry-title">Bachelor of Technology (Information Technology)</span>
+                    <span class="entry-date">3rd Year | CGPA: 7.31 (Ongoing)</span>
+                </div>
+                <div class="entry-sub">Parul University, Vadodara</div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <ul>
+                <li><strong>Programming Languages:</strong> Python, Java, C</li>
+                <li><strong>Web Technologies:</strong> HTML5, CSS3, JavaScript</li>
+                <li><strong>Tools & Platforms:</strong> VS Code, Git, GitHub, Thunder Client</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="section">
+            <h2 class="section-title">Technical Projects</h2>
+            <div class="entry">
+                <div class="entry-head">
+                    <span class="entry-title">AI College Chatbot</span>
+                </div>
+                <p>Developed conversational chatbot using Python and NLP concepts. Designed to assist students with campus-related queries.</p>
+            </div>
+            <div class="entry">
+                <div class="entry-head">
+                    <span class="entry-title">Food Waste Management System</span>
+                </div>
+                <p>Created a web-based platform to redistribute excess food. Focused on user-friendly interface and real-time tracking.</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="section">
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <ul>
+                <li>Pearson: HTML & CSS</li>
+                <li>IBM: Python for Data Science</li>
+                <li>IBM: Statistics 101</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="section">
+            <h2 class="section-title">Additional Information</h2>
+            <ul>
+                <li><strong>Strengths:</strong> Quick Learner, Teamwork & Communication, Problem-Solving</li>
+                <li><strong>Languages:</strong> English (Fluent), Hindi, Gujarati</li>
+            </ul>
+        </section>
+    </div>
+
+</body>
+</html>

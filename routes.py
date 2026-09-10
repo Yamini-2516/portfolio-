@@ -1,143 +1,122 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from flask_login import login_user, logout_user, current_user, login_required
-from models import db, User, Product, Order, OrderItem, Review, CartItem
+from flask import Blueprint, render_template, request, jsonify, make_response
+from models import db, ContactMessage, Project, Certification, Skill
+import re
 
 bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
-    featured_products = Product.query.limit(4).all()
-    return render_template('home.html', products=featured_products)
-
-@bp.route('/shop')
-def shop():
-    products = Product.query.all()
-    return render_template('shop.html', products=products)
-
-@bp.route('/product/<int:id>')
-def product_detail(id):
-    product = Product.query.get_or_404(id)
-    reviews = Review.query.filter_by(product_id=id).order_by(Review.date_posted.desc()).all()
-    return render_template('product_detail.html', product=product, reviews=reviews)
-
-@bp.route('/login', methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
-        user = User.query.filter_by(email=email).first()
-        if user and user.check_password(password):
-            login_user(user)
-            flash('Logged in successfully.', 'success')
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main.index'))
-        else:
-            flash('Login unsuccessful. Please check email and password.', 'danger')
-    return render_template('login.html')
-
-@bp.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        
-        user = User.query.filter_by(email=email).first()
-        if user:
-            flash('Email address already exists.', 'danger')
-            return redirect(url_for('main.signup'))
-            
-        new_user = User(name=name, email=email)
-        new_user.set_password(password)
-        db.session.add(new_user)
-        db.session.commit()
-        login_user(new_user)
-        return redirect(url_for('main.index'))
-    return render_template('signup.html')
-
-@bp.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('main.index'))
-
-@bp.route('/cart')
-@login_required
-def cart():
-    cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
-    total = sum(item.product.price * item.quantity for item in cart_items)
-    return render_template('cart.html', cart_items=cart_items, total=total)
-
-@bp.route('/add_to_cart/<int:product_id>', methods=['POST'])
-@login_required
-def add_to_cart(product_id):
-    quantity = int(request.form.get('quantity', 1))
-    item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id).first()
-    if item:
-        item.quantity += quantity
-    else:
-        new_item = CartItem(user_id=current_user.id, product_id=product_id, quantity=quantity)
-        db.session.add(new_item)
-    db.session.commit()
-    return redirect(url_for('main.cart'))
-
-@bp.route('/remove_from_cart/<int:item_id>', methods=['POST'])
-@login_required
-def remove_from_cart(item_id):
-    item = CartItem.query.get_or_404(item_id)
-    if item.user_id == current_user.id:
-        db.session.delete(item)
-        db.session.commit()
-    return redirect(url_for('main.cart'))
-
-@bp.route('/checkout', methods=['POST'])
-@login_required
-def checkout():
-    cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
-    if not cart_items:
-        return redirect(url_for('main.cart'))
-        
-    total = sum(item.product.price * item.quantity for item in cart_items)
-    order = Order(user_id=current_user.id, total_amount=total)
-    db.session.add(order)
-    db.session.flush() # get order id
+    projects = Project.query.all()
+    certifications = Certification.query.all()
+    skills = Skill.query.all()
     
-    for item in cart_items:
-        order_item = OrderItem(order_id=order.id, product_id=item.product_id, quantity=item.quantity, price=item.product.price)
-        db.session.add(order_item)
-        db.session.delete(item)
-        
+    # Categorize skills
+    skills_by_cat = {
+        'languages': [s for s in skills if s.category == 'languages'],
+        'web': [s for s in skills if s.category == 'web'],
+        'tools': [s for s in skills if s.category == 'tools'],
+        'soft': [s for s in skills if s.category == 'soft']
+    }
+    
+    return render_template('index.html', 
+                           projects=projects, 
+                           certifications=certifications, 
+                           skills_by_cat=skills_by_cat)
+
+@bp.route('/api/contact', methods=['POST'])
+def contact():
+    data = request.get_json() or request.form
+    name = data.get('name', '').strip()
+    email = data.get('email', '').strip()
+    subject = data.get('subject', '').strip()
+    message = data.get('message', '').strip()
+
+    if not name or not email or not message:
+        return jsonify({'status': 'error', 'message': 'Please fill in all required fields.'}), 400
+
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        return jsonify({'status': 'error', 'message': 'Please provide a valid email address.'}), 400
+
+    msg = ContactMessage(name=name, email=email, subject=subject or 'Portfolio Contact', message=message)
+    db.session.add(msg)
     db.session.commit()
-    flash('Order placed successfully!', 'success')
-    return redirect(url_for('main.orders'))
 
-@bp.route('/orders')
-@login_required
-def orders():
-    user_orders = Order.query.filter_by(user_id=current_user.id).order_by(Order.date_ordered.desc()).all()
-    return render_template('orders.html', orders=user_orders)
+    return jsonify({
+        'status': 'success',
+        'message': f'Thank you {name}! Your message has been sent successfully. I will get back to you soon!'
+    })
 
-@bp.route('/about')
-def about():
-    return render_template('about.html')
+# Interactive AI Chatbot Endpoint (Simulator)
+@bp.route('/api/chatbot', methods=['POST'])
+def chatbot_api():
+    data = request.get_json() or {}
+    user_msg = data.get('message', '').strip().lower()
+    
+    if not user_msg:
+        return jsonify({'response': 'Hello! I am Parul University AI Assistant created by Yamini. How can I help you today?'})
 
-@bp.route('/add_review/<int:product_id>', methods=['POST'])
-@login_required
-def add_review(product_id):
-    rating = int(request.form.get('rating'))
-    comment = request.form.get('comment')
-    review = Review(product_id=product_id, user_id=current_user.id, rating=rating, comment=comment)
-    db.session.add(review)
-    db.session.commit()
-    return redirect(url_for('main.product_detail', id=product_id))
+    if any(w in user_msg for w in ['hi', 'hello', 'hey', 'greetings']):
+        reply = "Hello! Welcome to Parul University AI Assistant. You can ask me about Admission Process, IT Department Courses, Library Timings, Exam Schedule, or Campus Location!"
+    elif any(w in user_msg for w in ['admission', 'apply', 'enroll', 'cut off', 'eligibility']):
+        reply = "Admissions for B.Tech Information Technology at Parul University require 10+2 with Physics, Chemistry, and Mathematics (PCM). You can apply online via the official university portal."
+    elif any(w in user_msg for w in ['course', 'syllabus', 'it', 'subject', 'b.tech', 'btech']):
+        reply = "The B.Tech IT program covers core areas including Python Programming, Data Structures & Algorithms, Web Technologies (HTML/CSS/JS), Database Systems, and NLP/AI Applications."
+    elif any(w in user_msg for w in ['fee', 'fees', 'tuition', 'cost']):
+        reply = "Tuition fees for B.Tech IT at Parul University are approximately ₹80,000 to ₹1,20,000 per year. Merit-based scholarships are available for high achievers."
+    elif any(w in user_msg for w in ['exam', 'schedule', 'timetable', 'midterm', 'final']):
+        reply = "Mid-term examinations take place in October/March, while End-Semester University examinations commence in December/May. Timetables are published on the Student Portal."
+    elif any(w in user_msg for w in ['library', 'books', 'timing', 'hours']):
+        reply = "The Parul University Central Library is open Monday to Saturday from 8:00 AM to 10:00 PM. Digital resources and IEEE journals are accessible 24/7."
+    elif any(w in user_msg for w in ['yamini', 'creator', 'developer', 'who made']):
+        reply = "This AI Chatbot was designed and developed by Yamini Parmar, a 3rd year B.Tech IT student at Parul University specializing in Python & NLP!"
+    else:
+        reply = f"Thank you for your query about '{user_msg}'. For detailed assistance, please reach out to Parul University Student Helpdesk or contact Yamini Parmar directly at yaminiparmar2516@gmail.com!"
 
-@bp.route('/api/cart/count')
-def cart_count():
-    if current_user.is_authenticated:
-        count = db.session.query(db.func.sum(CartItem.quantity)).filter(CartItem.user_id == current_user.id).scalar() or 0
-        return jsonify({'count': count})
-    return jsonify({'count': 0})
+    return jsonify({'response': reply})
+
+# Food Waste Management System Simulator Endpoints
+# Simulated state in-memory for live demo session
+FOOD_ITEMS_STORE = [
+    {"id": 1, "donor": "Parul Campus Canteen", "item": "Fresh Rice & Curry", "qty": "15 kg", "servings": "30 Meals", "status": "Available", "time": "15 mins ago", "location": "Vadodara Campus"},
+    {"id": 2, "donor": "Royal Hotel & Banquet", "item": "Assorted Paneer & Rotis", "qty": "25 kg", "servings": "50 Meals", "status": "Claimed by Hope Foundation", "time": "1 hour ago", "location": "Alkapuri, Vadodara"},
+    {"id": 3, "donor": "Green Leaves Event Hall", "item": "Mixed Vegetable Pulao", "qty": "10 kg", "servings": "20 Meals", "status": "Available", "time": "30 mins ago", "location": "Waghodia Road, Vadodara"}
+]
+
+@bp.route('/api/food-waste/items', methods=['GET'])
+def get_food_items():
+    return jsonify({'items': FOOD_ITEMS_STORE})
+
+@bp.route('/api/food-waste/donate', methods=['POST'])
+def donate_food():
+    data = request.get_json() or {}
+    donor = data.get('donor', 'Anonymous Donor')
+    item = data.get('item', 'Surplus Meals')
+    qty = data.get('qty', '5 kg')
+    servings = data.get('servings', '10 Meals')
+    location = data.get('location', 'Vadodara')
+
+    new_id = len(FOOD_ITEMS_STORE) + 1
+    new_item = {
+        "id": new_id,
+        "donor": donor,
+        "item": item,
+        "qty": qty,
+        "servings": servings,
+        "status": "Available",
+        "time": "Just now",
+        "location": location
+    }
+    FOOD_ITEMS_STORE.insert(0, new_item)
+    return jsonify({'status': 'success', 'message': 'Food donation listed successfully in real-time!', 'item': new_item})
+
+@bp.route('/api/food-waste/claim/<int:item_id>', methods=['POST'])
+def claim_food(item_id):
+    for item in FOOD_ITEMS_STORE:
+        if item['id'] == item_id:
+            item['status'] = 'Claimed by Local NGO'
+            return jsonify({'status': 'success', 'message': f"Item '{item['item']}' successfully claimed for redistribution!"})
+    return jsonify({'status': 'error', 'message': 'Item not found.'}), 404
+
+@bp.route('/resume/view')
+def view_resume():
+    return render_template('resume.html')

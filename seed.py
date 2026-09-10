@@ -1,42 +1,81 @@
-from app import create_app
-from models import db, Product, User
-from werkzeug.security import generate_password_hash
+from models import db, Project, Certification, Skill
 
-app = create_app()
+def seed_data():
+    # Projects
+    projects = [
+        Project(
+            title="AI College Chatbot",
+            subtitle="Campus Intelligence & Student Query Assistant",
+            description="Developed an intelligent conversational chatbot using Python and Natural Language Processing (NLP) techniques. Designed specifically to assist university students with real-time campus queries including admissions, course syllabi, fee structures, library hours, and examination schedules.",
+            tech_stack="Python, NLTK, Flask, JavaScript, HTML5/CSS3",
+            category="AI & NLP",
+            github_url="https://github.com/Yamini-2516",
+            demo_type="chatbot",
+            icon_name="bot"
+        ),
+        Project(
+            title="Food Waste Management System",
+            subtitle="Real-Time Food Redistribution Platform",
+            description="Created a dynamic web-based platform to bridge the gap between food donors (restaurants, events, canteens) and local NGOs/shelters. Features an intuitive user-friendly interface with real-time food availability tracking, instant request claiming, and inventory management.",
+            tech_stack="HTML5, CSS3, JavaScript, Python Flask, SQLite",
+            category="Web Application",
+            github_url="https://github.com/Yamini-2516",
+            demo_type="food_waste",
+            icon_name="heart-handshake"
+        )
+    ]
 
-def seed_db():
-    with app.app_context():
-        db.drop_all()
-        db.create_all()
-        
-        if User.query.first() is None:
-            admin = User(name='Admin', email='admin@example.com')
-            admin.set_password('admin123')
-            db.session.add(admin)
-            db.session.commit() # Commit after adding admin
-            print("Admin user created.")
+    # Certifications
+    certifications = [
+        Certification(
+            title="Pearson Certification: HTML & CSS",
+            issuer="Pearson",
+            badge_color="#e06d53",
+            verify_url="#"
+        ),
+        Certification(
+            title="IBM Professional Certificate: Python for Data Science",
+            issuer="IBM",
+            badge_color="#054ada",
+            verify_url="#"
+        ),
+        Certification(
+            title="IBM Certificate: Statistics 101",
+            issuer="IBM",
+            badge_color="#1070e0",
+            verify_url="#"
+        )
+    ]
 
-        if Product.query.first() is None:
-            products = [
-                Product(name='Cyber Headphones X', description='Next-gen wireless headphones with immersive 3D sound.', price=24999.00, model_url='headphone', image_url='/static/images/cyber_headphones.png', stock=50),
-                Product(name='Quantum Sneaker', description='Adaptive footwear with auto-lacing technology.', price=15999.00, model_url='sneaker', image_url='/static/images/quantum_sneaker.png', stock=30),
-                Product(name='Neon Watch', description='Smartwatch with holographic display.', price=29999.00, model_url='watch', image_url='/static/images/neon_watch.png', stock=100),
-                Product(name='Aero Drone', description='4K camera drone with autonomous flight paths.', price=75000.00, model_url='drone', image_url='/static/images/aero_drone.png', stock=15),
-                Product(name='VR Goggles V2', description='Ultra high-res virtual reality headset.', price=40000.00, model_url='vr', image_url='/static/images/vr_goggles.png', stock=20),
-                Product(name='Mechanical Keyboard Pro', description='RGB mechanical keyboard with custom switches.', price=12000.00, model_url='keyboard', image_url='/static/images/mech_keyboard.png', stock=75),
-                Product(name='Holo Smartphone Zenith', description='Futuristic edge-less smartphone with holographic projection capabilities.', price=85000.00, model_url='smartphone', image_url='/static/images/holo_smartphone.png', stock=120),
-                Product(name='Cyberpunk Leather Jacket', description='High-tech stylish jacket with neon glowing stripes and climate control.', price=18500.00, model_url='jacket', image_url='/static/images/cyber_jacket.png', stock=80),
-                Product(name='Anti-Gravity Hoverboard', description='Sleek floating transit device with powerful anti-gravity thrusters.', price=150000.00, model_url='hoverboard', image_url='/static/images/hoverboard.png', stock=5),
-                Product(name='Spectra Smart Glasses', description='Augmented reality glasses featuring seamless data streams and navigation overlays.', price=32000.00, model_url='glasses', image_url='/static/images/smart_glasses.png', stock=45)
-            ]
-            
-            for p in products:
-                db.session.add(p)
-                
-            db.session.commit()
-            print("Database seeded with mock products!")
-        else:
-            print("Database already seeded.")
+    # Skills
+    skills = [
+        # Languages
+        Skill(name="Python", category="languages", proficiency=90, icon="python"),
+        Skill(name="Java", category="languages", proficiency=82, icon="java"),
+        Skill(name="C", category="languages", proficiency=78, icon="c"),
+        # Web Tech
+        Skill(name="HTML5", category="web", proficiency=95, icon="html5"),
+        Skill(name="CSS3", category="web", proficiency=90, icon="css3"),
+        Skill(name="JavaScript", category="web", proficiency=85, icon="javascript"),
+        # Tools
+        Skill(name="VS Code", category="tools", proficiency=95, icon="code"),
+        Skill(name="Git", category="tools", proficiency=88, icon="git"),
+        Skill(name="GitHub", category="tools", proficiency=90, icon="github"),
+        Skill(name="Thunder Client", category="tools", proficiency=85, icon="zap"),
+        # Soft Skills
+        Skill(name="Problem-Solving", category="soft", proficiency=92, icon="brain"),
+        Skill(name="Teamwork & Communication", category="soft", proficiency=90, icon="users"),
+        Skill(name="Quick Learner", category="soft", proficiency=95, icon="rocket")
+    ]
+
+    db.session.add_all(projects)
+    db.session.add_all(certifications)
+    db.session.add_all(skills)
+    db.session.commit()
+    print("Database successfully seeded with Yamini Parmar's portfolio data!")
 
 if __name__ == '__main__':
-    seed_db()
+    from app import create_app
+    app = create_app()
+    with app.app_context():
+        seed_data()

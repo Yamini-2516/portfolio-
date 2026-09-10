@@ -1,0 +1,660 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section" id="hero">
+    <div class="hero-glow-bg"></div>
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="pulse-dot"></span> Available for Software Engineering Internships & Projects
+            </div>
+            
+            <h1 class="hero-title">
+                Hi, I'm <span class="gradient-text">Yamini Parmar</span>
+            </h1>
+            
+            <h2 class="hero-subtitle">
+                <span class="typewriter-prefix">I build </span>
+                <span class="typewriter-text" id="typewriter"></span>
+                <span class="typewriter-cursor">|</span>
+            </h2>
+
+            <p class="hero-description">
+                Highly motivated and detail-oriented B.Tech Information Technology student at <strong>Parul University, Vadodara</strong>. Passionate about Python development, NLP chatbots, web technologies, and solving real-world problems.
+            </p>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number">3<sup>rd</sup> Year</span>
+                    <span class="stat-label">B.Tech IT</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">7.31</span>
+                    <span class="stat-label">CGPA (Ongoing)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3+</span>
+                    <span class="stat-label">Certifications</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Major Projects</span>
+                </div>
+            </div>
+
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-code-branch"></i> Explore Projects
+                </a>
+                <a href="#contact" class="btn btn-secondary btn-lg">
+                    <i class="fa-solid fa-paper-plane"></i> Contact Me
+                </a>
+                <button onclick="openResumeModal()" class="btn btn-outline btn-lg">
+                    <i class="fa-solid fa-file-pdf"></i> View Resume
+                </button>
+            </div>
+
+            <div class="hero-social-strip">
+                <span class="strip-label">Quick Links:</span>
+                <a href="https://github.com/Yamini-2516" target="_blank" rel="noopener" class="social-chip">
+                    <i class="fa-brands fa-github"></i> GitHub: Yamini-2516
+                </a>
+                <a href="mailto:yaminiparmar2516@gmail.com" class="social-chip">
+                    <i class="fa-solid fa-envelope"></i> yaminiparmar2516@gmail.com
+                </a>
+                <a href="tel:+918128385822" class="social-chip">
+                    <i class="fa-solid fa-phone"></i> +91 8128385822
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="code-card-wrapper">
+                <div class="code-card-header">
+                    <div class="window-buttons">
+                        <span class="btn-circle red"></span>
+                        <span class="btn-circle yellow"></span>
+                        <span class="btn-circle green"></span>
+                    </div>
+                    <span class="code-title">developer_profile.py</span>
+                </div>
+                <div class="code-card-body">
+                    <pre><code class="language-python"><span class="token-keyword">class</span> <span class="token-class">Developer</span>:
+    <span class="token-keyword">def</span> <span class="token-def">__init__</span>(self):
+        self.name = <span class="token-string">"Yamini Parmar"</span>
+        self.role = <span class="token-string">"B.Tech IT Student"</span>
+        self.university = <span class="token-string">"Parul University"</span>
+        self.location = <span class="token-string">"Gujarat, India"</span>
+        self.status = <span class="token-string">"CGPA: 7.31 (Ongoing)"</span>
+        self.github = <span class="token-string">"https://github.com/Yamini-2516"</span>
+
+    <span class="token-keyword">def</span> <span class="token-def">get_skills</span>(self):
+        <span class="token-keyword">return</span> {
+            <span class="token-string">"languages"</span>: [<span class="token-string">"Python"</span>, <span class="token-string">"Java"</span>, <span class="token-string">"C"</span>],
+            <span class="token-string">"web"</span>: [<span class="token-string">"HTML5"</span>, <span class="token-string">"CSS3"</span>, <span class="token-string">"JavaScript"</span>],
+            <span class="token-string">"tools"</span>: [<span class="token-string">"VS Code"</span>, <span class="token-string">"Git"</span>, <span class="token-string">"GitHub"</span>, <span class="token-string">"Thunder Client"</span>]
+        }
+
+<span class="token-comment"># Ready to create impactful solutions</span>
+yamini = Developer()
+print(f<span class="token-string">"Building the future at {yamini.university}"</span>)</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section about-section" id="about">
+    <div class="section-container">
+        <div class="section-header text-center">
+            <span class="section-subtitle">BACKGROUND & EDUCATION</span>
+            <h2 class="section-title">About Me</h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-card main-about">
+                <div class="card-icon-header">
+                    <i class="fa-solid fa-graduation-cap highlight-icon"></i>
+                    <h3>Education & Overview</h3>
+                </div>
+                <p>
+                    I am a <strong>3rd Year B.Tech Information Technology</strong> student at <strong>Parul University, Vadodara</strong>. My academic journey is driven by a passion for software development, algorithmic problem solving, and practical application engineering.
+                </p>
+                <p>
+                    I maintain a solid academic track record with an ongoing <strong>CGPA of 7.31</strong> while actively building hands-on projects in Python, Natural Language Processing (NLP), and Web Development.
+                </p>
+                
+                <div class="education-badge-strip">
+                    <div class="edu-chip">
+                        <i class="fa-solid fa-university"></i>
+                        <div>
+                            <strong>Parul University, Vadodara</strong>
+                            <span>Bachelor of Technology (IT) &bull; 2024 - 2028</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-card strengths-card">
+                <div class="card-icon-header">
+                    <i class="fa-solid fa-lightbulb highlight-icon"></i>
+                    <h3>Core Strengths</h3>
+                </div>
+                <ul class="strengths-list">
+                    <li>
+                        <i class="fa-solid fa-bolt strength-icon"></i>
+                        <div>
+                            <strong>Quick Learner</strong>
+                            <span>Rapidly adapt to new programming languages, frameworks, and developer workflows.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-users-gear strength-icon"></i>
+                        <div>
+                            <strong>Teamwork & Communication</strong>
+                            <span>Effective collaborator in team projects with strong interpersonal and presentation skills.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-puzzle-piece strength-icon"></i>
+                        <div>
+                            <strong>Problem-Solving</strong>
+                            <span>Structured analytical approach to diagnosing errors and implementing efficient logic.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="about-card languages-card">
+                <div class="card-icon-header">
+                    <i class="fa-solid fa-language highlight-icon"></i>
+                    <h3>Languages Spoken</h3>
+                </div>
+                <div class="language-items">
+                    <div class="lang-pill">
+                        <span class="lang-name">English</span>
+                        <span class="lang-level badge-fluent">Fluent</span>
+                    </div>
+                    <div class="lang-pill">
+                        <span class="lang-name">Hindi</span>
+                        <span class="lang-level badge-native">Native / Proficient</span>
+                    </div>
+                    <div class="lang-pill">
+                        <span class="lang-name">Gujarati</span>
+                        <span class="lang-level badge-native">Native / Regional</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="section skills-section" id="skills">
+    <div class="section-container">
+        <div class="section-header text-center">
+            <span class="section-subtitle">TECHNICAL EXPERTISE</span>
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="skills-filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Skills</button>
+            <button class="filter-btn" data-filter="languages">Programming Languages</button>
+            <button class="filter-btn" data-filter="web">Web Technologies</button>
+            <button class="filter-btn" data-filter="tools">Tools & Platforms</button>
+            <button class="filter-btn" data-filter="soft">Strengths</button>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+            {% for cat, skills in skills_by_cat.items() %}
+                {% for skill in skills %}
+                <div class="skill-card" data-category="{{ cat }}">
+                    <div class="skill-info">
+                        <div class="skill-name-icon">
+                            {% if skill.name == 'Python' %}<i class="fa-brands fa-python skill-ic"></i>
+                            {% elif skill.name == 'Java' %}<i class="fa-brands fa-java skill-ic"></i>
+                            {% elif skill.name == 'HTML5' %}<i class="fa-brands fa-html5 skill-ic"></i>
+                            {% elif skill.name == 'CSS3' %}<i class="fa-brands fa-css3-alt skill-ic"></i>
+                            {% elif skill.name == 'JavaScript' %}<i class="fa-brands fa-js skill-ic"></i>
+                            {% elif skill.name == 'Git' %}<i class="fa-brands fa-git-alt skill-ic"></i>
+                            {% elif skill.name == 'GitHub' %}<i class="fa-brands fa-github skill-ic"></i>
+                            {% else %}<i class="fa-solid fa-code skill-ic"></i>
+                            {% endif %}
+                            <span class="skill-title">{{ skill.name }}</span>
+                        </div>
+                        <span class="skill-percentage">{{ skill.proficiency }}%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: {{ skill.proficiency }}%;"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="section projects-section" id="projects">
+    <div class="section-container">
+        <div class="section-header text-center">
+            <span class="section-subtitle">PORTFOLIO WORK</span>
+            <h2 class="section-title">Technical Projects</h2>
+            <div class="title-underline"></div>
+            <p class="section-lead">Explore hands-on software applications developed by Yamini Parmar, featuring interactive live simulators!</p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1: AI College Chatbot -->
+            <div class="project-card featured-project">
+                <div class="project-header">
+                    <div class="project-category-badge"><i class="fa-solid fa-robot"></i> AI & NLP</div>
+                    <div class="project-actions">
+                        <a href="https://github.com/Yamini-2516" target="_blank" rel="noopener" class="icon-link" title="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-body">
+                    <h3 class="project-title">AI College Chatbot</h3>
+                    <h4 class="project-subtitle">Campus Query Assistant</h4>
+                    <p class="project-desc">
+                        Developed a conversational chatbot using <strong>Python</strong> and <strong>NLP concepts</strong> designed specifically to assist university students with campus-related queries including admissions, courses, examination schedules, and library hours.
+                    </p>
+
+                    <div class="project-highlights">
+                        <span><i class="fa-solid fa-check"></i> Natural Language Query Processing</span>
+                        <span><i class="fa-solid fa-check"></i> Real-Time Campus Information Retrieval</span>
+                        <span><i class="fa-solid fa-check"></i> User-Friendly Conversation UI</span>
+                    </div>
+
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">NLP</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <div class="project-footer" style="display:flex; gap:0.6rem;">
+                    <button class="btn btn-primary" style="flex:1;" onclick="openChatbotModal()">
+                        <i class="fa-solid fa-comments"></i> Live Demo
+                    </button>
+                    <a href="https://github.com/Yamini-2516" target="_blank" rel="noopener" class="btn btn-outline" title="GitHub Repository">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2: Food Waste Management System -->
+            <div class="project-card featured-project">
+                <div class="project-header">
+                    <div class="project-category-badge web-badge"><i class="fa-solid fa-hand-holding-heart"></i> Web Platform</div>
+                    <div class="project-actions">
+                        <a href="https://github.com/Yamini-2516" target="_blank" rel="noopener" class="icon-link" title="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-body">
+                    <h3 class="project-title">Food Waste Management System</h3>
+                    <h4 class="project-subtitle">Excess Food Redistribution Platform</h4>
+                    <p class="project-desc">
+                        Created a web-based platform to redistribute excess food from canteens, events, and restaurants to local NGOs and food banks. Focused on a clean, responsive interface and real-time tracking of food donations.
+                    </p>
+
+                    <div class="project-highlights">
+                        <span><i class="fa-solid fa-check"></i> Real-Time Food Listing & Status Updates</span>
+                        <span><i class="fa-solid fa-check"></i> NGO Claim & Redistribution Workflow</span>
+                        <span><i class="fa-solid fa-check"></i> Intuitive Donor & Recipient Dashboard</span>
+                    </div>
+
+                    <div class="tech-tags">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQLite</span>
+                    </div>
+                </div>
+
+                <div class="project-footer" style="display:flex; gap:0.6rem;">
+                    <button class="btn btn-secondary" style="flex:1;" onclick="openFoodWasteModal()">
+                        <i class="fa-solid fa-utensils"></i> Live Preview
+                    </button>
+                    <a href="https://github.com/Yamini-2516" target="_blank" rel="noopener" class="btn btn-outline" title="GitHub Repository">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications Section -->
+<section class="section certs-section" id="certifications">
+    <div class="section-container">
+        <div class="section-header text-center">
+            <span class="section-subtitle">CREDENTIALS & ACHIEVEMENTS</span>
+            <h2 class="section-title">Certifications</h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="certs-grid">
+            <div class="cert-card">
+                <div class="cert-badge-ic pearson-ic">
+                    <i class="fa-solid fa-file-code"></i>
+                </div>
+                <div class="cert-content">
+                    <span class="cert-issuer">PEARSON</span>
+                    <h3 class="cert-title">Pearson Certification: HTML & CSS</h3>
+                    <p class="cert-desc">Verified proficiency in modern semantic HTML5 markup, responsive CSS styling, layout models, and web standard compliance.</p>
+                    <span class="cert-status"><i class="fa-solid fa-circle-check"></i> Verified Certificate</span>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-badge-ic ibm-ic">
+                    <i class="fa-brands fa-python"></i>
+                </div>
+                <div class="cert-content">
+                    <span class="cert-issuer">IBM</span>
+                    <h3 class="cert-title">IBM Python for Data Science</h3>
+                    <p class="cert-desc">Comprehensive certification covering Python fundamentals, data structures, Pandas/Numpy data manipulation, and data analysis pipelines.</p>
+                    <span class="cert-status"><i class="fa-solid fa-circle-check"></i> Verified Certificate</span>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-badge-ic ibm-stat-ic">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div class="cert-content">
+                    <span class="cert-issuer">IBM</span>
+                    <h3 class="cert-title">IBM Statistics 101</h3>
+                    <p class="cert-desc">Foundational mastery of statistical analysis, probability distributions, hypothesis testing, and quantitative decision-making.</p>
+                    <span class="cert-status"><i class="fa-solid fa-circle-check"></i> Verified Certificate</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section contact-section" id="contact">
+    <div class="section-container">
+        <div class="section-header text-center">
+            <span class="section-subtitle">GET IN TOUCH</span>
+            <h2 class="section-title">Contact Me</h2>
+            <div class="title-underline"></div>
+            <p class="section-lead">Interested in working together or discussing opportunities? Send a message below!</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info-column">
+                <div class="contact-info-card">
+                    <div class="c-info-item">
+                        <div class="c-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="c-details">
+                            <h4>Email Address</h4>
+                            <a href="mailto:yaminiparmar2516@gmail.com">yaminiparmar2516@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="c-info-item">
+                        <div class="c-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="c-details">
+                            <h4>Phone Number</h4>
+                            <a href="tel:+918128385822">+91 8128385822</a>
+                        </div>
+                    </div>
+
+                    <div class="c-info-item">
+                        <div class="c-icon"><i class="fa-brands fa-github"></i></div>
+                        <div class="c-details">
+                            <h4>GitHub Profile</h4>
+                            <a href="https://github.com/Yamini-2516" target="_blank" rel="noopener">github.com/Yamini-2516</a>
+                        </div>
+                    </div>
+
+                    <div class="c-info-item">
+                        <div class="c-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="c-details">
+                            <h4>Location</h4>
+                            <span>Parul University, Vadodara, Gujarat, India</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-column">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="contactName">Your Name <span class="required">*</span></label>
+                        <input type="text" id="contactName" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address <span class="required">*</span></label>
+                        <input type="email" id="contactEmail" name="email" required placeholder="name@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject" name="subject" placeholder="Project inquiry / Internship opportunity">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage">Message <span class="required">*</span></label>
+                        <textarea id="contactMessage" name="message" rows="5" required placeholder="Write your message here..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="contactSubmitBtn">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL 1: Interactive Resume Viewer -->
+<div id="resumeModal" class="modal-backdrop">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-file-pdf"></i> Resume - Yamini Parmar</h3>
+            <div class="modal-header-actions">
+                <a href="{{ url_for('main.view_resume') }}" target="_blank" class="btn btn-sm btn-outline">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full View
+                </a>
+                <button class="modal-close" onclick="closeResumeModal()">&times;</button>
+            </div>
+        </div>
+        <div class="modal-body resume-modal-body">
+            <div class="resume-sheet">
+                <header class="resume-head text-center">
+                    <h1>YAMINI PARMAR</h1>
+                    <p class="resume-tag">B.Tech IT Student | Software Developer</p>
+                    <div class="resume-contact-bar">
+                        <span><i class="fa-solid fa-phone"></i> +91 8128385822</span>
+                        <span><i class="fa-solid fa-envelope"></i> yaminiparmar2516@gmail.com</span>
+                        <span><i class="fa-brands fa-github"></i> Yamini-2516</span>
+                        <span><i class="fa-solid fa-location-dot"></i> Gujarat, India</span>
+                    </div>
+                </header>
+
+                <hr class="resume-divider">
+
+                <section class="resume-sec">
+                    <h2>PROFESSIONAL SUMMARY</h2>
+                    <p>Highly motivated and detail-oriented B.Tech Information Technology student at <strong>Parul University, Vadodara</strong>, seeking an opportunity to apply strong problem-solving skills in a software development environment. Proficient in Python, Java, and web technologies with a strong interest in practical applications.</p>
+                </section>
+
+                <section class="resume-sec">
+                    <h2>EDUCATION</h2>
+                    <div class="resume-entry">
+                        <div class="entry-head">
+                            <h3>Bachelor of Technology (Information Technology)</h3>
+                            <span class="entry-date">3rd Year | CGPA: 7.31 (Ongoing)</span>
+                        </div>
+                        <p class="entry-inst">Parul University, Vadodara</p>
+                    </div>
+                </section>
+
+                <section class="resume-sec">
+                    <h2>TECHNICAL SKILLS</h2>
+                    <ul class="resume-bullets">
+                        <li><strong>Programming Languages:</strong> Python, Java, C</li>
+                        <li><strong>Web Technologies:</strong> HTML5, CSS3, JavaScript</li>
+                        <li><strong>Tools & Platforms:</strong> VS Code, Git, GitHub, Thunder Client</li>
+                    </ul>
+                </section>
+
+                <section class="resume-sec">
+                    <h2>TECHNICAL PROJECTS</h2>
+                    <div class="resume-entry">
+                        <h3>AI College Chatbot</h3>
+                        <p>Developed conversational chatbot using Python and NLP concepts. Designed to assist students with campus-related queries.</p>
+                    </div>
+                    <div class="resume-entry">
+                        <h3>Food Waste Management System</h3>
+                        <p>Created a web-based platform to redistribute excess food. Focused on user-friendly interface and real-time tracking.</p>
+                    </div>
+                </section>
+
+                <section class="resume-sec">
+                    <h2>CERTIFICATIONS & ACHIEVEMENTS</h2>
+                    <ul class="resume-bullets">
+                        <li>Pearson: HTML & CSS</li>
+                        <li>IBM: Python for Data Science</li>
+                        <li>IBM: Statistics 101</li>
+                    </ul>
+                </section>
+
+                <section class="resume-sec">
+                    <h2>ADDITIONAL INFORMATION</h2>
+                    <ul class="resume-bullets">
+                        <li><strong>Strengths:</strong> Quick Learner, Teamwork & Communication, Problem-Solving</li>
+                        <li><strong>Languages:</strong> English (Fluent), Hindi, Gujarati</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> Print Resume</button>
+            <button class="btn btn-primary" onclick="closeResumeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 2: Interactive AI Chatbot Simulator -->
+<div id="chatbotModal" class="modal-backdrop">
+    <div class="modal-dialog modal-md">
+        <div class="modal-header chatbot-header">
+            <div class="header-bot-info">
+                <i class="fa-solid fa-robot bot-avatar-ic"></i>
+                <div>
+                    <h3>Parul Campus AI Chatbot</h3>
+                    <span class="online-status"><span class="green-dot"></span> Active Assistant by Yamini Parmar</span>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeChatbotModal()">&times;</button>
+        </div>
+        
+        <div class="modal-body chatbot-body" id="chatWindow">
+            <div class="chat-message bot">
+                <div class="msg-bubble">
+                    Hello! I am Parul University AI Assistant created by Yamini. You can ask me about Admissions, B.Tech IT Syllabus, Exam Schedules, Library Hours, or Tuition Fees!
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-quick-chips">
+            <button onclick="sendQuickQuery('What are the admission requirements?')">Admissions</button>
+            <button onclick="sendQuickQuery('What subjects are taught in B.Tech IT?')">IT Courses</button>
+            <button onclick="sendQuickQuery('What are the library hours?')">Library Hours</button>
+            <button onclick="sendQuickQuery('Who developed this chatbot?')">Developer Info</button>
+        </div>
+
+        <form id="chatbotForm" class="chat-input-bar">
+            <input type="text" id="chatInput" placeholder="Ask a campus query..." autocomplete="off">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL 3: Interactive Food Waste Management System Simulator -->
+<div id="foodWasteModal" class="modal-backdrop">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-header foodwaste-header">
+            <h3><i class="fa-solid fa-hand-holding-heart"></i> Food Waste Management Platform</h3>
+            <button class="modal-close" onclick="closeFoodWasteModal()">&times;</button>
+        </div>
+        
+        <div class="modal-body foodwaste-body">
+            <div class="fw-tabs">
+                <button class="fw-tab-btn active" id="fwListTabBtn" onclick="switchFwTab('list')">Available Food Donations</button>
+                <button class="fw-tab-btn" id="fwDonateTabBtn" onclick="switchFwTab('donate')">+ List Excess Food</button>
+            </div>
+
+            <!-- TAB 1: List view -->
+            <div id="fwListTab" class="fw-tab-content active">
+                <div class="table-responsive">
+                    <table class="fw-table">
+                        <thead>
+                            <tr>
+                                <th>Donor Entity</th>
+                                <th>Food Item Description</th>
+                                <th>Quantity</th>
+                                <th>Est. Servings</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="foodItemsTbody">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 2: Donate Form -->
+            <div id="fwDonateTab" class="fw-tab-content">
+                <form id="fwDonateForm" class="fw-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Donor Entity Name</label>
+                            <input type="text" id="fwDonorName" required placeholder="e.g. Parul Canteen / Hotel Green">
+                        </div>
+                        <div class="form-group">
+                            <label>Food Item Details</label>
+                            <input type="text" id="fwItemName" required placeholder="e.g. Fresh Vegetable Biryani">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Weight / Quantity</label>
+                            <input type="text" id="fwQty" required placeholder="e.g. 12 kg">
+                        </div>
+                        <div class="form-group">
+                            <label>Estimated Servings</label>
+                            <input type="text" id="fwServings" required placeholder="e.g. 25 Meals">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Pickup Location</label>
+                        <input type="text" id="fwLocation" required placeholder="e.g. Campus Block A, Vadodara">
+                    </div>
+                    <button type="submit" class="btn btn-secondary btn-block"><i class="fa-solid fa-plus"></i> Submit Surplus Food Listing</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
